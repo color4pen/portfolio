@@ -15,8 +15,8 @@ const { Content } = await project.render();
 ---
 
 <Layout title={`${project.data.title} - Portfolio`} description={project.data.description}>
-  <article class="section">
-    <div class="container-custom max-w-4xl">
+  <article class="py-16 md:py-24 lg:py-32">
+    <div class="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12">
       <a href="/#projects" class="inline-flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:underline mb-8 md:mb-10">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
@@ -25,7 +25,7 @@ const { Content } = await project.render();
       </a>
 
       <header class="mb-10 md:mb-12">
-        <h1 class="heading-1 mb-4 md:mb-6">{project.data.title}</h1>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6">{project.data.title}</h1>
         <p class="text-xl text-gray-600 dark:text-gray-400 mb-6 md:mb-8">
           {project.data.description}
         </p>

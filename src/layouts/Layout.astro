@@ -38,12 +38,26 @@ const { title = 'Portfolio', description = 'Modern portfolio site' } = Astro.pro
   </head>
   <body>
     <header class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
-      <nav class="container-custom py-5 md:py-6">
+      <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12 py-4 md:py-6">
         <div class="flex justify-between items-center">
-          <a href="/" class="text-xl font-bold text-primary-600 dark:text-primary-400">
+          <a href="/" class="text-lg md:text-xl font-bold text-primary-600 dark:text-primary-400">
             Portfolio
           </a>
-          <div class="flex items-center gap-6">
+
+          <!-- Mobile menu button -->
+          <button
+            id="mobile-menu-toggle"
+            class="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            aria-label="Toggle menu"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path class="menu-open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+              <path class="menu-close hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+
+          <!-- Desktop menu -->
+          <div class="hidden md:flex items-center gap-6">
             <a href="#about" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">About</a>
             <a href="#skills" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Skills</a>
             <a href="#experience" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Experience</a>
@@ -63,6 +77,30 @@ const { title = 'Portfolio', description = 'Modern portfolio site' } = Astro.pro
             </button>
           </div>
         </div>
+
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4">
+          <div class="flex flex-col gap-4">
+            <a href="#about" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors py-2">About</a>
+            <a href="#skills" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors py-2">Skills</a>
+            <a href="#experience" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors py-2">Experience</a>
+            <a href="#projects" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors py-2">Projects</a>
+            <a href="#contact" class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors py-2">Contact</a>
+            <button
+              id="theme-toggle-mobile"
+              class="flex items-center gap-2 py-2 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+              aria-label="Toggle dark mode"
+            >
+              <svg class="w-5 h-5 hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+              </svg>
+              <svg class="w-5 h-5 dark:hidden" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+              </svg>
+              <span>Toggle theme</span>
+            </button>
+          </div>
+        </div>
       </nav>
     </header>
 
@@ -71,17 +109,64 @@ const { title = 'Portfolio', description = 'Modern portfolio site' } = Astro.pro
     </main>
 
     <footer class="bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-12 md:py-16">
-      <div class="container-custom text-center text-gray-600 dark:text-gray-400">
+      <div class="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 text-center text-gray-600 dark:text-gray-400">
         <p>&copy; {new Date().getFullYear()} Portfolio. All rights reserved.</p>
       </div>
     </footer>
 
     <script>
+      // Mobile menu toggle
+      const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const menuOpen = document.querySelector('.menu-open');
+      const menuClose = document.querySelector('.menu-close');
+
+      mobileMenuToggle?.addEventListener('click', () => {
+        mobileMenu?.classList.toggle('hidden');
+        menuOpen?.classList.toggle('hidden');
+        menuClose?.classList.toggle('hidden');
+      });
+
+      // Close mobile menu when clicking on a link
+      const mobileLinks = mobileMenu?.querySelectorAll('a');
+      mobileLinks?.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu?.classList.add('hidden');
+          menuOpen?.classList.remove('hidden');
+          menuClose?.classList.add('hidden');
+        });
+      });
+
+      // Theme toggle for desktop
       const themeToggle = document.getElementById('theme-toggle');
-      
-      themeToggle?.addEventListener('click', () => {
+      const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+
+      const toggleTheme = () => {
         const isDark = document.documentElement.classList.toggle('dark');
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      };
+
+      themeToggle?.addEventListener('click', toggleTheme);
+      themeToggleMobile?.addEventListener('click', toggleTheme);
+
+      // Smooth scroll with center alignment for section links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          if (targetId === '#') return;
+
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+            const offsetPosition = elementPosition - (window.innerHeight / 2) + (targetElement.offsetHeight / 2);
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+        });
       });
     </script>
   </body>
