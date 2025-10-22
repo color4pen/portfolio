@@ -22,9 +22,9 @@ const skillCategories = [
 <section id="skills" class="section">
   <div class="container-custom">
     <h2 class="heading-2 text-center">Technical Skills</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
       {skillCategories.map((category) => (
-        <div class="card p-6">
+        <div class="card p-6 md:p-8">
           <h3 class="heading-3 mb-4 text-primary-600 dark:text-primary-400">{category.title}</h3>
           <div class="flex flex-wrap gap-2">
             {category.skills.map((skill) => (
