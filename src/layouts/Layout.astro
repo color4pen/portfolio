@@ -151,12 +151,12 @@ const { title = 'Portfolio', description = 'Modern portfolio site' } = Astro.pro
 
       // Smooth scroll with center alignment for section links
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+        anchor.addEventListener('click', function (this: HTMLAnchorElement, e: Event) {
           e.preventDefault();
           const targetId = this.getAttribute('href');
-          if (targetId === '#') return;
+          if (!targetId || targetId === '#') return;
 
-          const targetElement = document.querySelector(targetId);
+          const targetElement = document.querySelector(targetId) as HTMLElement | null;
           if (targetElement) {
             const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
             const offsetPosition = elementPosition - (window.innerHeight / 2) + (targetElement.offsetHeight / 2);
