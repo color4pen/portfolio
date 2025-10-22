@@ -1,65 +1,44 @@
 ---
-const experiences = [
-  {
-    company: 'Tech Company Inc.',
-    position: 'Senior Full Stack Developer',
-    period: '2022 - Present',
-    description: 'Leading development of enterprise web applications using modern tech stack. Mentoring junior developers and implementing best practices.',
-    achievements: [
-      'Improved application performance by 40%',
-      'Led team of 5 developers',
-      'Implemented CI/CD pipeline',
-    ],
-  },
-  {
-    company: 'Startup Co.',
-    position: 'Full Stack Developer',
-    period: '2020 - 2022',
-    description: 'Developed and maintained customer-facing web applications. Collaborated with designers and product managers to deliver high-quality features.',
-    achievements: [
-      'Built 3 major features from scratch',
-      'Reduced bug count by 30%',
-      'Improved test coverage to 85%',
-    ],
-  },
-  {
-    company: 'Digital Agency',
-    position: 'Frontend Developer',
-    period: '2018 - 2020',
-    description: 'Created responsive websites and web applications for various clients. Focused on performance optimization and accessibility.',
-    achievements: [
-      'Delivered 15+ client projects',
-      'Achieved 95+ Lighthouse scores',
-      'Implemented design system',
-    ],
-  },
-];
+import { getCollection } from 'astro:content';
+
+const experiences = await getCollection('experience');
+const sortedExperiences = experiences.sort((a, b) => {
+  // Sort by period (most recent first)
+  // This is a simple sort, you might want to parse the period for better sorting
+  return b.data.period.localeCompare(a.data.period);
+});
 ---
 
-<section class="pt-12 pb-16 md:pt-16 md:pb-24 lg:pt-20 lg:pb-32 bg-gray-50 dark:bg-gray-800">
+<section id="experience" class="pt-12 pb-16 md:pt-16 md:pb-24 lg:pt-20 lg:pb-32 bg-gray-50 dark:bg-gray-800">
   <div class="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
     <div class="text-center mb-12 md:mb-16">
       <span class="text-sm md:text-base font-semibold text-primary-600 dark:text-primary-400 uppercase tracking-wider block mb-4">Career Journey</span>
-      <h2 id="experience" class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-gray-100 mb-6">Work Experience</h2>
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-gray-100 mb-6">Work Experience</h2>
       <div class="w-24 h-1.5 bg-gradient-to-r from-primary-600 to-primary-400 mx-auto rounded-full"></div>
     </div>
-    <div class="max-w-4xl mx-auto space-y-6 md:space-y-8">
-      {experiences.map((exp) => (
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 md:p-8">
+    <div class="max-w-4xl mx-auto space-y-8 md:space-y-10">
+      {sortedExperiences.map((exp) => (
+        <a id={`experience-${exp.slug}`} href={`${import.meta.env.BASE_URL}/experience/${exp.slug}`.replace('//', '/')} class="block bg-white dark:bg-gray-800 rounded-xl shadow-xl hover:shadow-2xl border-2 border-gray-100 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-600 transition-all duration-300 p-8 md:p-10 group">
           <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
             <div>
-              <h3 class="text-2xl font-bold mb-1">{exp.position}</h3>
-              <p class="text-lg text-primary-600 dark:text-primary-400">{exp.company}</p>
+              <h3 class="text-2xl font-bold mb-1 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">{exp.data.position}</h3>
+              <p class="text-lg text-primary-600 dark:text-primary-400">{exp.data.company}</p>
             </div>
-            <span class="text-gray-600 dark:text-gray-400 mt-2 md:mt-0">{exp.period}</span>
+            <span class="text-gray-600 dark:text-gray-400 mt-2 md:mt-0">{exp.data.period}</span>
           </div>
-          <p class="text-gray-700 dark:text-gray-300 mb-4">{exp.description}</p>
+          <p class="text-gray-700 dark:text-gray-300 mb-4">{exp.data.description}</p>
           <ul class="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-400">
-            {exp.achievements.map((achievement) => (
+            {exp.data.achievements.map((achievement) => (
               <li>{achievement}</li>
             ))}
           </ul>
-        </div>
+          <div class="mt-4 text-primary-600 dark:text-primary-400 font-medium flex items-center gap-2">
+            <span>Read more</span>
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </div>
+        </a>
       ))}
     </div>
   </div>
