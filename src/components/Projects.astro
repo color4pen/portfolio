@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+
+const projects = await getCollection('projects');
+const sortedProjects = projects.sort((a, b) => {
+  if (a.data.featured && !b.data.featured) return -1;
+  if (!a.data.featured && b.data.featured) return 1;
+  return 0;
+});
+---
+
+<section id="projects" class="section">
+  <div class="container-custom">
+    <h2 class="heading-2 text-center">Featured Projects</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {sortedProjects.map((project) => (
+        <a href={`/projects/${project.slug}`} class="card group">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+              {project.data.title}
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-4 text-sm">
+              {project.data.description}
+            </p>
+            <div class="mb-4">
+              <p class="text-sm text-gray-500 dark:text-gray-500 mb-1">
+                <strong>Role:</strong> {project.data.role}
+              </p>
+              <p class="text-sm text-gray-500 dark:text-gray-500">
+                <strong>Period:</strong> {project.data.period}
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              {project.data.tech.slice(0, 3).map((tech) => (
+                <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded text-xs font-medium">
+                  {tech}
+                </span>
+              ))}
+              {project.data.tech.length > 3 && (
+                <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-xs font-medium">
+                  +{project.data.tech.length - 3}
+                </span>
+              )}
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
