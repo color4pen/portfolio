@@ -5,5 +5,6 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
   integrations: [tailwind()],
   site: 'https://color4pen.github.io',
-  base: '/portfolio',
+  // Use base path in production (GitHub Pages), not in development
+  base: import.meta.env.PROD ? '/portfolio' : undefined,
 });
