@@ -1,0 +1,107 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+---
+
+<Layout title={`${project.data.title} - Portfolio`} description={project.data.description}>
+  <article class="section">
+    <div class="container-custom max-w-4xl">
+      <a href="/#projects" class="inline-flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:underline mb-8">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        Back to Projects
+      </a>
+
+      <header class="mb-8">
+        <h1 class="heading-1 mb-4">{project.data.title}</h1>
+        <p class="text-xl text-gray-600 dark:text-gray-400 mb-6">
+          {project.data.description}
+        </p>
+        
+        <div class="flex flex-wrap gap-4 mb-6">
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+            <span class="text-gray-700 dark:text-gray-300"><strong>Role:</strong> {project.data.role}</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            <span class="text-gray-700 dark:text-gray-300"><strong>Period:</strong> {project.data.period}</span>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="text-lg font-semibold mb-3">Technologies Used</h2>
+          <div class="flex flex-wrap gap-2">
+            {project.data.tech.map((tech) => (
+              <span class="px-4 py-2 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-lg text-sm font-medium">
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+      </header>
+
+      <div class="prose prose-lg dark:prose-invert max-w-none">
+        <Content />
+      </div>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  :global(.prose) {
+    @apply text-gray-700 dark:text-gray-300;
+  }
+  
+  :global(.prose h2) {
+    @apply text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-gray-100;
+  }
+  
+  :global(.prose h3) {
+    @apply text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-gray-100;
+  }
+  
+  :global(.prose p) {
+    @apply mb-4;
+  }
+  
+  :global(.prose ul, .prose ol) {
+    @apply mb-4 pl-6;
+  }
+  
+  :global(.prose li) {
+    @apply mb-2;
+  }
+  
+  :global(.prose a) {
+    @apply text-primary-600 dark:text-primary-400 hover:underline;
+  }
+  
+  :global(.prose strong) {
+    @apply font-semibold text-gray-900 dark:text-gray-100;
+  }
+  
+  :global(.prose code) {
+    @apply bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-sm;
+  }
+  
+  :global(.prose pre) {
+    @apply bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto mb-4;
+  }
+</style>
