@@ -2,12 +2,18 @@
 title: Weather Dashboard
 description: Beautiful weather dashboard with location-based forecasts and interactive maps
 tech:
-  - Vue.js
-  - TypeScript
-  - Chart.js
-  - Leaflet
-  - OpenWeather API
-  - Vite
+  - name: Vue.js
+    category: Frontend
+  - name: TypeScript
+    category: Frontend
+  - name: Chart.js
+    category: Tools
+  - name: Leaflet
+    category: Tools
+  - name: OpenWeather API
+    category: Tools
+  - name: Vite
+    category: Tools
 role: Frontend Developer
 period: "2022"
 featured: false

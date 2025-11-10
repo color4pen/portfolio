@@ -2,12 +2,18 @@
 title: Task Management App
 description: Collaborative task management application with real-time updates and team features
 tech:
-  - React
-  - Node.js
-  - Express
-  - MongoDB
-  - Socket.io
-  - Redux
+  - name: React
+    category: Frontend
+  - name: Node.js
+    category: Backend
+  - name: Express
+    category: Backend
+  - name: MongoDB
+    category: Database
+  - name: Socket.io
+    category: Tools
+  - name: Redux
+    category: Frontend
 role: Full Stack Developer
 period: 2022 - 2023
 featured: true

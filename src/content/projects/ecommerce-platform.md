@@ -1,13 +1,19 @@
 ---
 title: E-Commerce Platform
 description: A full-featured e-commerce platform with advanced product management and payment integration
-tech: 
-  - Next.js
-  - TypeScript
-  - Tailwind CSS
-  - PostgreSQL
-  - Stripe
-  - Prisma
+tech:
+  - name: Next.js
+    category: Frontend
+  - name: TypeScript
+    category: Frontend
+  - name: Tailwind CSS
+    category: Frontend
+  - name: PostgreSQL
+    category: Database
+  - name: Stripe
+    category: Tools
+  - name: Prisma
+    category: Backend
 role: Lead Developer
 period: 2023 - 2024
 featured: true

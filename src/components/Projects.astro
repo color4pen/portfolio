@@ -37,7 +37,7 @@ const sortedProjects = projects.sort((a, b) => {
             <div class="flex flex-wrap gap-2">
               {project.data.tech.slice(0, 3).map((tech) => (
                 <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded text-xs font-medium">
-                  {tech}
+                  {tech.name}
                 </span>
               ))}
               {project.data.tech.length > 3 && (

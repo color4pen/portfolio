@@ -25,8 +25,8 @@ const { Content } = await project.render();
       </a>
 
       <header class="mb-10 md:mb-12">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6">{project.data.title}</h1>
-        <p class="text-xl text-gray-600 dark:text-gray-400 mb-6 md:mb-8">
+        <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6">{project.data.title}</h1>
+        <p class="text-lg text-gray-600 dark:text-gray-400 mb-6 md:mb-8">
           {project.data.description}
         </p>
         
@@ -50,7 +50,7 @@ const { Content } = await project.render();
           <div class="flex flex-wrap gap-2">
             {project.data.tech.map((tech) => (
               <span class="px-4 py-2 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-lg text-sm font-medium">
-                {tech}
+                {tech.name}
               </span>
             ))}
           </div>

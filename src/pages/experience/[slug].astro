@@ -14,7 +14,7 @@ const { experience } = Astro.props;
 const { Content } = await experience.render();
 ---
 
-<Layout title={`${experience.data.position} at ${experience.data.company} - Portfolio`} description={experience.data.description}>
+<Layout title={`${experience.data.title} - Portfolio`} description={experience.data.description}>
   <article class="pt-12 pb-16 md:pt-16 md:pb-24 lg:pt-20 lg:pb-32">
     <div class="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12">
       <a href={`${import.meta.env.BASE_URL}/#experience-${experience.slug}`.replace('//', '/')} class="inline-flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:underline mb-8 md:mb-10">
@@ -26,10 +26,12 @@ const { Content } = await experience.render();
 
       <header class="mb-10 md:mb-12">
         <div class="mb-6">
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-2">{experience.data.position}</h1>
-          <p class="text-2xl md:text-3xl text-primary-600 dark:text-primary-400 font-semibold">
-            {experience.data.company}
-          </p>
+          <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">{experience.data.title}</h1>
+          <div class="flex flex-wrap items-center gap-3 text-base text-gray-600 dark:text-gray-400">
+            <span class="font-semibold text-primary-600 dark:text-primary-400">{experience.data.position}</span>
+            <span class="text-gray-400 dark:text-gray-600">•</span>
+            <span>{experience.data.company}</span>
+          </div>
         </div>
 
         <div class="flex flex-wrap gap-4 mb-6 md:mb-8 text-gray-600 dark:text-gray-400">
@@ -39,15 +41,6 @@ const { Content } = await experience.render();
             </svg>
             <span>{experience.data.period}</span>
           </div>
-          {experience.data.location && (
-            <div class="flex items-center gap-2">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-              </svg>
-              <span>{experience.data.location}</span>
-            </div>
-          )}
         </div>
 
         <p class="text-xl text-gray-600 dark:text-gray-400 mb-6 md:mb-8">
@@ -60,7 +53,7 @@ const { Content } = await experience.render();
             <div class="flex flex-wrap gap-2">
               {experience.data.tech.map((tech) => (
                 <span class="px-4 py-2 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-lg text-sm font-medium">
-                  {tech}
+                  {tech.name}
                 </span>
               ))}
             </div>

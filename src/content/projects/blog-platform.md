@@ -2,11 +2,16 @@
 title: Blog Platform
 description: Modern blogging platform with markdown support and SEO optimization
 tech:
-  - Astro
-  - TypeScript
-  - Tailwind CSS
-  - Content Collections
-  - MDX
+  - name: Astro
+    category: Frontend
+  - name: TypeScript
+    category: Frontend
+  - name: Tailwind CSS
+    category: Frontend
+  - name: Content Collections
+    category: Tools
+  - name: MDX
+    category: Tools
 role: Developer
 period: "2023"
 featured: false
