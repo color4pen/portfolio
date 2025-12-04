@@ -1,145 +1,71 @@
 ---
 title: オンプレミスサーバー運用管理
 company: 印刷会社
-position: システム管理者
-period: 2016 - 2019
-description: オンプレミスサーバーの構築・運用・保守を3年間担当。社内システムの安定稼働を支えました。
+position: 社内エンジニア
+period: 2019 - 2022
+description: 社内オンプレミス環境におけるインフラ全般を担当。物理サーバー5台・仮想サーバー4台を管理し、Webサーバー、ストレージサーバー、ファイルサーバー、GitLabサーバー等の構築から運用まで一貫して担当しました。
 achievements:
-  - 99.9%以上の稼働率を維持
-  - セキュリティインシデントゼロを達成
-  - バックアップ体制の整備により事業継続性を確保
+  - 物理サーバー5台・仮想サーバー4台の構築・運用を担当
+  - Prometheus + Grafanaによる監視体制を構築
+  - cronスクリプトとMinIOを活用したバックアップ体制を整備
+  - GitLab CIによるCI/CDパイプラインの構築
+  - Docker Composeを用いたコンテナ環境の構築・運用
+  - 社内プロキシ環境における各種サーバー・コンテナのネットワーク設定
 tech:
   - name: Linux
     category: Infrastructure
-  - name: Apache
+  - name: Ubuntu
     category: Infrastructure
-  - name: MySQL
+  - name: CentOS
+    category: Infrastructure
+  - name: Nginx
+    category: Infrastructure
+  - name: PostgreSQL
     category: Database
-  - name: PHP
-    category: Backend
-  - name: Windows Server
+  - name: Docker
     category: Infrastructure
-  - name: Active Directory
+  - name: Docker Compose
     category: Infrastructure
+  - name: GitLab
+    category: Tools
+  - name: GitLab CI
+    category: Tools
+  - name: GitLab Runner
+    category: Tools
+  - name: Prometheus
+    category: Tools
+  - name: Grafana
+    category: Tools
+  - name: MinIO
+    category: Infrastructure
+  - name: Bash
+    category: Tools
+  - name: Vagrant
+    category: Tools
 ---
-
-## プロジェクト概要
-
-社内のオンプレミスサーバーの構築・運用・保守を担当。Webサーバー、データベースサーバー、ファイルサーバーなど複数のサーバーを管理し、社内システムの安定稼働を支えました。
 
 ## 役割・責任
 
-**役割:** システム管理者
+**役割:** 社内エンジニア
 
-- サーバー構築・設定
-- 日常運用・監視
-- 障害対応
-- セキュリティ管理
+インフラ構築・運用、監視基盤整備、CI/CD環境構築、アプリケーションリリースまで幅広く担当。
 
 ## 主な業務内容
 
-### サーバー構築・設定
+### インフラ基盤の構築・運用
 
-各種サーバーの構築と初期設定。
+サーバーのスペック選定・設計から携わり、Linux（Ubuntu中心、CentOS経験あり）でサーバーを構築。Vagrantで仮想環境を構築し、物理・仮想サーバーの両方を管理しました。Nginx、PostgreSQLの設定、IPアドレス設定、OS定期更新、メンテナンス通知の運用など、新規構築から既存サーバーの保守まで一貫して担当。
 
-**担当:**
-- Linux/Windowsサーバーのインストール
-- Apache, MySQL, PHPの設定
-- Active Directoryの構築
-- ネットワーク設定
+社内プロキシ環境だったため、Linux、Docker、コンテナ内、GitLab、MinIO等あらゆる箇所でプロキシ設定が必要で、そのノウハウを蓄積しました。
 
-**成果:**
-- 安定したサーバー環境の構築
-- 標準化された設定管理
-- ドキュメント整備
+### 監視・バックアップ体制の整備
 
-### 日常運用・監視
+Prometheus + Grafanaで監視基盤を構築し、サーバーリソースやログを可視化。問題の早期発見・対応ができる体制を整えました。
 
-サーバーの健全性を常に監視。
+バックアップはcronでスクリプトを定期実行し、ファイルサーバーやMinIO（オブジェクトストレージ）に保存。MinIOはバックアップの他、seedデータ保存や自社サービスのS3実装検証にも活用しました。
 
-**担当:**
-- サーバーリソース監視
-- ログ監視
-- バックアップ実行・確認
-- パフォーマンスチェック
+### CI/CD・コンテナ環境の構築
 
-**成果:**
-- 99.9%以上の稼働率維持
-- 問題の早期発見・対応
-- 安定したサービス提供
+GitLab/GitLab Runnerサーバーの運用に加え、.gitlab-ci.ymlを書いてCI/CDパイプラインを構築。開発・デプロイの自動化を実現しました。GitLabのバージョンアップやRunnerの障害対応も担当。
 
-### 障害対応
-
-サーバー障害発生時の迅速な復旧対応。
-
-**担当:**
-- 障害原因の調査・特定
-- 復旧作業
-- 再発防止策の実施
-- インシデント報告書作成
-
-**成果:**
-- 平均復旧時間の短縮
-- 障害の未然防止
-- 業務への影響最小化
-
-### セキュリティ管理
-
-サーバーのセキュリティを維持・強化。
-
-**担当:**
-- セキュリティパッチ適用
-- ファイアウォール設定
-- アクセス権限管理
-- 脆弱性診断・対応
-
-**成果:**
-- セキュリティインシデントゼロ
-- 安全な社内システム環境
-- コンプライアンス遵守
-
-### バックアップ管理
-
-データ保護のための包括的なバックアップ体制構築。
-
-**担当:**
-- バックアップ設計・実装
-- 定期バックアップの自動化
-- リストアテスト
-- バックアップデータ管理
-
-**成果:**
-- データ損失ゼロ
-- 迅速な復旧体制
-- 事業継続性の確保
-
-### ユーザーサポート
-
-社内ユーザーの技術サポート。
-
-**担当:**
-- 問い合わせ対応
-- トラブルシューティング
-- アカウント管理
-- 社内向けマニュアル作成
-
-**成果:**
-- 高いユーザー満足度
-- 迅速な問題解決
-- 自己解決率の向上
-
-## 技術スタック
-
-- **OS:** Linux (CentOS, Ubuntu), Windows Server
-- **Webサーバー:** Apache, Nginx
-- **データベース:** MySQL, PostgreSQL
-- **言語:** Bash, PowerShell, PHP
-- **その他:** Active Directory, Samba, Postfix
-
-## 成果・学び
-
-- サーバー構築・運用の実践的スキル
-- Linux/Windowsサーバー管理能力
-- 障害対応・トラブルシューティング力
-- セキュリティ管理のベストプラクティス
-- システム全体を俯瞰する力
+アプリケーションはDocker Composeでコンテナ化して運用。本番リリースのデプロイ手順を設計し、マイグレーション、seeder、必要なスクリプトの実行を行いました。障害時は古いコンテナに差し替えるロールバック手順も整備。

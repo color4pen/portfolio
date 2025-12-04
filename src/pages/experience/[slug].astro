@@ -43,13 +43,8 @@ const { Content } = await experience.render();
           </div>
         </div>
 
-        <p class="text-xl text-gray-600 dark:text-gray-400 mb-6 md:mb-8">
-          {experience.data.description}
-        </p>
-
         {experience.data.tech && (
-          <div>
-            <h2 class="text-lg font-semibold mb-3">Technologies Used</h2>
+          <div class="mb-6 md:mb-8">
             <div class="flex flex-wrap gap-2">
               {experience.data.tech.map((tech) => (
                 <span class="px-4 py-2 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-lg text-sm font-medium">
@@ -59,6 +54,13 @@ const { Content } = await experience.render();
             </div>
           </div>
         )}
+
+        <div class="mb-6 md:mb-8">
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3">プロジェクト概要</h2>
+          <p class="text-base text-gray-900 dark:text-gray-100 leading-relaxed">
+            {experience.data.description}
+          </p>
+        </div>
       </header>
 
       <div class="prose prose-lg dark:prose-invert max-w-none">
