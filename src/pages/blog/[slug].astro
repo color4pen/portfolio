@@ -1,0 +1,116 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout title={`${post.data.title} - Blog`} description={post.data.description}>
+  <article class="pt-4 pb-16 md:pt-6 md:pb-24 lg:pt-8 lg:pb-32">
+    <div class="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12">
+      <a href="/blog" class="inline-flex items-center gap-1 text-sm text-primary-600 dark:text-primary-400 hover:underline mb-4">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        記事一覧に戻る
+      </a>
+
+      <header class="mb-10 md:mb-12">
+        <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6">{post.data.title}</h1>
+        <div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-500">
+          <time datetime={post.data.publishedAt.toISOString()}>
+            {post.data.publishedAt.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </time>
+          {post.data.tags && (
+            <div class="flex gap-2">
+              {post.data.tags.map((tag) => (
+                <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-xs">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      </header>
+
+      <div class="prose prose-lg dark:prose-invert max-w-none">
+        <Content />
+      </div>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  :global(.prose) {
+    @apply text-gray-700 dark:text-gray-300;
+  }
+
+  :global(.prose h2) {
+    @apply text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-gray-100;
+  }
+
+  :global(.prose h3) {
+    @apply text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-gray-100;
+  }
+
+  :global(.prose p) {
+    @apply mb-4;
+  }
+
+  :global(.prose ul, .prose ol) {
+    @apply mb-4 pl-6;
+  }
+
+  :global(.prose li) {
+    @apply mb-2;
+  }
+
+  :global(.prose a) {
+    @apply text-primary-600 dark:text-primary-400 hover:underline;
+  }
+
+  :global(.prose strong) {
+    @apply font-semibold text-gray-900 dark:text-gray-100;
+  }
+
+  :global(.prose code) {
+    @apply bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-sm;
+  }
+
+  :global(.prose pre) {
+    @apply bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto mb-4;
+  }
+
+  :global(.prose table) {
+    @apply w-full border-collapse mb-6;
+  }
+
+  :global(.prose th) {
+    @apply bg-gray-100 dark:bg-gray-800 px-4 py-2 text-left font-semibold text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600;
+  }
+
+  :global(.prose td) {
+    @apply px-4 py-2 border border-gray-300 dark:border-gray-600;
+  }
+
+  :global(.prose tr:nth-child(even)) {
+    @apply bg-gray-50 dark:bg-gray-800/50;
+  }
+
+  :global(.prose blockquote) {
+    @apply border-l-4 border-primary-500 pl-4 italic text-gray-600 dark:text-gray-400 my-4;
+  }
+
+  :global(.prose hr) {
+    @apply border-gray-300 dark:border-gray-600 my-8;
+  }
+</style>
