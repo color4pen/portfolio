@@ -11,7 +11,7 @@ const sortedPosts = posts.sort((a, b) =>
 <Layout title="Blog - Portfolio" description="技術ブログ・エンジニアリングについての考え">
   <section class="pt-4 pb-16 md:pt-6 md:pb-24 lg:pt-8 lg:pb-32">
     <div class="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12">
-      <a href="/" class="inline-flex items-center gap-1 text-sm text-primary-600 dark:text-primary-400 hover:underline mb-4">
+      <a href={`${import.meta.env.BASE_URL}/`.replace('//', '/')} class="inline-flex items-center gap-1 text-sm text-primary-600 dark:text-primary-400 hover:underline mb-4">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
         </svg>
@@ -21,7 +21,7 @@ const sortedPosts = posts.sort((a, b) =>
       <div class="space-y-8">
         {sortedPosts.map((post) => (
           <article class="p-6 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-500 transition-colors">
-            <a href={`/blog/${post.slug}`} class="block">
+            <a href={`${import.meta.env.BASE_URL}/blog/${post.slug}`.replace('//', '/')} class="block">
               <h2 class="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
                 {post.data.title}
               </h2>
