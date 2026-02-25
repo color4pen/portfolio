@@ -109,4 +109,4 @@ AIとうまく協働するための鍵は、良い仕様を書けること。そ
 
 ---
 
-*関連記事：[仕様駆動開発とは](/blog/spec-driven-development)*
+*関連記事：[仕様駆動開発とは](./spec-driven-development)*
