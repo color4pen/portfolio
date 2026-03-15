@@ -13,6 +13,7 @@ const projectsCollection = defineCollection({
     tech: z.array(techSchema),
     role: z.string(),
     period: z.string(),
+    url: z.string().url().optional(),
     image: z.string().optional(),
     featured: z.boolean().default(false),
   }),

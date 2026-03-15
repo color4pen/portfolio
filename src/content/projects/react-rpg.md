@@ -12,6 +12,7 @@ tech:
     category: Frontend
   - name: Claude Code
     category: Tools
+url: https://color4pen.github.io/2026-quest/
 role: Solo Developer
 period: "2025"
 featured: true
